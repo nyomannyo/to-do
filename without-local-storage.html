@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #data {
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+<!-- onload     ==> event ketika halaman ini dibuka pertama kali -->
+<body onload="tampilkanData();">
+    <label for="nama">Nama: </label><br/>
+    <input type="text" id="nama" /> <br/><br/>
+    <label for="nama">Tanggal Lahir: </label><br/>
+    <input type="date" id="tanggal-lahir" /> <br/><br/>
+    <label for="nama">Alamat: </label><br/>
+    <textarea id="alamat" cols="30" rows="10"></textarea> <br/><br/>
+
+    <button onclick="simpanData();">Tampilkan Data</button>
+
+    <hr/>
+
+    <div>
+        <table id="data">
+            <tr>
+                <td>Nama</td>
+                <td>:</td>
+                <td id="data-nama"></td>
+            </tr>
+            <tr>
+                <td>Tanggal Lahir</td>
+                <td>:</td>
+                <td id="data-tanggal-lahir"></td>
+            </tr>
+            <tr>
+                <td>Alamat</td>
+                <td>:</td>
+                <td id="data-alamat"></td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        // arrow function 
+
+        simpanData = () => {
+            // mengmbil nilai dari input
+            let nama = document.getElementById('nama').value;
+            let tanggal_lahir = document.getElementById('tanggal-lahir').value;
+            let alamat = document.getElementById('alamat').value;
+
+            // simpan ke local storage
+            /*
+                format: 
+                    localStorage.setItem(key, value);
+            */
+            localStorage.setItem('nama', nama);
+            localStorage.setItem('tanggal_lahir', tanggal_lahir);
+            localStorage.setItem('alamat', alamat);
+
+            tampilkanData();
+        }
+
+        
+        tampilkanData = () => {
+            document.getElementById('data-nama').innerHTML = localStorage.getItem('nama');
+            document.getElementById('data-tanggal-lahir').innerHTML = localStorage.getItem('tanggal_lahir');
+            document.getElementById('data-alamat').innerHTML = localStorage.getItem('alamat');
+        }
+
+    </script>
+
+
+</body>
+</html>

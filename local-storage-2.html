@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #data {
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+<!-- onload     ==> event ketika halaman ini dibuka pertama kali -->
+<body onload="tampilkanData();">
+    <label for="nama">Nama: </label><br/>
+    <input type="text" id="nama" /> <br/><br/>
+    <label for="nama">Tanggal Lahir: </label><br/>
+    <input type="date" id="tanggal-lahir" /> <br/><br/>
+    <label for="nama">Alamat: </label><br/>
+    <textarea id="alamat" cols="30" rows="10"></textarea> <br/><br/>
+
+    <button onclick="simpanData();">Simpan Data</button>
+
+    <hr/>
+
+    <div>
+        <ul id="hasil-wrapper">
+
+        </ul>
+    </div>
+
+    <script>
+        // arrow function 
+
+        simpanData = () => {
+            // mengmbil nilai dari input
+            let nama = document.getElementById('nama').value;
+            let tanggal_lahir = document.getElementById('tanggal-lahir').value;
+            let alamat = document.getElementById('alamat').value;
+
+            let data = JSON.parse(localStorage.getItem('data'));
+            if (!data) {
+                data = [];
+            }
+            // menyimpan objek ke dalam array
+            data.push({
+                nama: nama,
+                tanggal_lahir: tanggal_lahir,
+                alamat: alamat
+            });
+
+            localStorage.setItem('data', JSON.stringify(data));
+
+            tampilkanData();
+        }
+
+        
+        tampilkanData = () => {
+            let list = '';
+            let data = JSON.parse(localStorage.getItem('data'));
+
+            for (let i = 0; i < data.length; i++) {
+                // list = list + '...';
+                list += `
+                    <li> ${data[i].nama} || ${data[i].tanggal_lahir} || ${data[i].alamat} </li>
+                `;
+            }
+
+            document.getElementById('hasil-wrapper').innerHTML = list;
+
+        }
+
+    </script>
+
+
+</body>
+</html>
